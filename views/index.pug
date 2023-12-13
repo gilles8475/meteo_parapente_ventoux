@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    .selection(class="container-fluid") 
+        .entry(class="border border-2 row col-sm m-2")
+            .input-group(class="input-group-lg row")
+                label.input-group-text(class="text-secondary  m-1" for="terrains") Sélectionnez un terrains dans la liste déroulante
+                select#terrains.form-select(class="text-bg-info m-1",name="terrains")
+        .option(class="border border-2 row col-sm m-2")
+            .col-sm(class="input-group m-2")
+                .input-group-text
+                    label.form-check-label(class="p-2" for="compatible") Filtrer les valeurs compatibles avec le site
+                    input#compatible.form-check-input(class="border border-primary border-3",type="checkbox",name="compatible")
+            .col-sm(class="input-group m-2 input-group-lg")
+                .input-group-text
+                    span.p-3 Prévi à
+                    input(type="radio",id="1j", name="jour-previ", value = 1 checked)
+                    label(class="p-2" for="1j") 1 jour
+                    input(type="radio", id="2j",name="jour-previ", value = 2 )
+                    label(class="p-2" for="2j") 2 jours
+                    input(type="radio", id="3j",name="jour-previ", value = 3)
+                    label(class="p-2" for="3j") 3 jours
+                    input(type="radio", id="4j",name="jour-previ", value = 4 )
+                    label(class="p-2" for="4j") 4 jours
+                
+
+    table#tab(class="table  m-2 border border-2")
+        thead
+            tr
+              th heure
+              th secteur
+              th direction
+              th vent
+              th Meteo
+              th 
+              th temperature
+        tbody#tableau
+            tr
