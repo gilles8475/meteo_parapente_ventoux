@@ -6,23 +6,35 @@ const terrains=
         "lon": 5.4035,
         "secteurs": [ "SW", "W", "NW" ]
     },
-    "saint-jean_att": {
-        "name":"Saint-Jean attero",
-        "lat": 44.039,
-        "lon": 5.396,
-        "secteurs":["N","NE","E","SE","S","SW","W","NW"]
-    },
+//    "saint-jean_att": {
+//        "name":"Saint-Jean attero",
+//        "lat": 44.039,
+//        "lon": 5.396,
+//        "secteurs":["N","NE","E","SE","S","SW","W","NW"]
+//    },
     "rissas": {
         "name":"Rissas Beaumont du Ventoux",
         "lat": 44.1958,
         "lon": 5.1677,
         "secteurs": [ "S", "SW" ]
     },
-    "ventoux": {
-        "name": "Mont Ventoux",
+    "ventoux_sud_la_chappelle": {
+        "name": "Mont Ventoux Sud La Chapelle",
         "lat": 44.1737,
         "lon": 5.2693,
         "secteurs": [ "SE", "S" ]
+    },
+    "ventoux_sud_les_cretes": {
+        "name": "Mont Ventoux Sud Les Cretes",
+        "lat": 44.1739,
+        "lon": 5.2644,
+        "secteurs": [ "SE", "S" ]
+    },
+    "ventoux_nord": {
+        "name": "Mont Ventoux Nord",
+        "lat": 44.1747,
+        "lon": 5.2785,
+        "secteurs": ["N","NE","NO" ]
     },
     "banon": {
         "name": "Banon Grou de Bane",
@@ -41,6 +53,12 @@ const terrains=
         "lat": 44.3367,
         "lon": 5.1543,
         "secteurs": [ "W", "NW" ]
+    },
+    "beauvoisin-col-de-mirande": {
+        "name": "Beauvoisin Col de Mirande",
+        "lat": 44.300,
+        "lon": 5.2361,
+        "secteurs": [ "SW", "W" ,"SE"]
     },
     "buc-ouest": {
         "name": "Buc Ouest",
@@ -72,14 +90,14 @@ const terrains=
         "lon": 5.06833,
         "secteurs": [ "N", "NW" ]
     },
-    "saint-hyppolyte":{
+    "saint-hippolyte":{
         "name":"Saint Hippolyte le Graveyron",
         "lat":44.1326,
         "lon": 5.075,
         "secteurs":["S"]
     },
         "Hey-haut":{
-            "name":"Col d'EY-HAUT",
+            "name":"Col d'Ey-Haut",
             "lat":44.3092,
             "lon":5.2824,
             "secteurs":["N","NE","NO"]
