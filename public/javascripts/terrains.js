@@ -83,6 +83,12 @@ const terrains=
             "lat":44.3092,
             "lon":5.2824,
             "secteurs":["N","NE","NO"]
+        },
+        "bergis-sud":{
+            "name":"Sederon Bergis",
+            "lat":"44.2032",
+            "lon":"5.5105",
+            "secteurs":["SE","S"]
         }
 }
 export default terrains
