@@ -77,6 +77,12 @@ const terrains=
         "lat":44.1326,
         "lon": 5.075,
         "secteurs":["S"]
-    }
+    },
+        "Hey-haut":{
+            "name":"Col d'EY-HAUT",
+            "lat":44.3092,
+            "lon":5.2824,
+            "secteurs":["N","NE","NO"]
+        }
 }
 export default terrains
