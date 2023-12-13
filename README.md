@@ -1,6 +1,6 @@
 # meteo_parapente_ventoux
 Simple web app to view meteo of paraglider  sites around Mont Ventoux
-New site can be added easily by updating the terrains.gs file
+New site can be added easily by updating the terrains.js file
 The datas rely on open-meteo api rest and use the Meteo France model
 
 ##Select paraglider spot in the drop-down list
