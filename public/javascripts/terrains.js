@@ -34,7 +34,7 @@ const terrains=
         "name": "Mont Ventoux Nord",
         "lat": 44.1747,
         "lon": 5.2785,
-        "secteurs": ["N","NE","NO" ]
+        "secteurs": ["N","NE","NW" ]
     },
     "banon": {
         "name": "Banon Grou de Bane",
@@ -100,13 +100,20 @@ const terrains=
             "name":"Col d'Ey-Haut",
             "lat":44.3092,
             "lon":5.2824,
-            "secteurs":["N","NE","NO"]
+            "secteurs":["N","NE","NW"]
         },
         "bergis-sud":{
             "name":"Sederon Bergis",
-            "lat":"44.2032",
-            "lon":"5.5105",
+            "lat":44.2032,
+            "lon":5.5105,
             "secteurs":["SE","S"]
-        }
+        },
+            "Hey-principal":{
+                    name: "Col d'Hey principal",
+                    "lat": 44.31111,
+                    "lon": 5.2817,
+                    "secteurs": ["N","NW"]
+            }    
+
 }
 export default terrains
