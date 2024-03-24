@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    .selection(class="container-fluid") 
+    .selection(class="container-fluid ") 
         .entry(class="border border-2 row col-sm m-2")
             .input-group(class="input-group-lg row")
                 label.input-group-text(class="text-secondary  m-1" for="terrains") Sélectionnez un terrains dans la liste déroulante
@@ -22,6 +22,9 @@ block content
                     label(class="p-2" for="3j") 3 jours
                     input(type="radio", id="4j",name="jour-previ", value = 4 )
                     label(class="p-2" for="4j") 4 jours
+    .vent(class="container-fluid") 
+        .col-sm(class="row col-sm m-2 border border-2") 
+            .h6(class="text-primary") Balises vent(cliquer pour mettre à jour)    
             .col-sm
                    div Rustrel 
                    canvas(id="rustrel", width="50px", height="50px" )
@@ -46,17 +49,17 @@ block content
                    div Saint-Amand 
                    canvas(id="saint_amand", width="50px", height="50px")
                    #saint_amand-wind Vent        
-                
 
-    table#tab(class="table  m-2 border border-2")
-        thead
-            tr
-              th heure
-              th secteur
-              th direction
-              th vent
-              th Meteo
-              th 
-              th temperature
-        tbody#tableau
-            tr
+    .tableau(class="container-fluid")
+            table#tab(class="table table-striped  border border-2 ")
+                thead
+                    tr
+                      th heure
+                      th secteur
+                      th direction
+                      th vent
+                      th Meteo
+                      th 
+                      th temperature
+                tbody#tableau
+                    tr
