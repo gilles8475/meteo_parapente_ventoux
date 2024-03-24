@@ -9,22 +9,30 @@ const radio1J=document.getElementById("1j")
 const radio2J=document.getElementById("2j")
 const radio3J=document.getElementById("3j")
 const radio4J=document.getElementById("4j")
+//numero de balise de vent sur openwindmap.org
+const rissas={name: "rissas", id:1463}
+const graveyron={id:815, name: "graveyron"}// l'attribut name doit correspondre au container canvas associé sur la page. ce canvas servira a indiquer le vent
+const saint_amand={id:1336, name: "saint_amand"}
+const rustrel={id:601, name:"rustrel"}
+const banon={id:157, name:"banon"}
+const bergies={id:1309, name:"bergies"}
+
 const converDate = (date)=>{
-const mois = ["janvier","fevrier","mars","avril","mai","juin","juillet","aout","septembre","octobre","novembre","decembre"]
-const mois_chiffre = ["01","02","03","04","05","06","07","08","09","10","11","12"]
-const jours = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"]
-const jours_short = ["dim","lun","mar","mer","jeu","ven","sam"]
-const d = new Date(date)
-//const heure= d.getHours() 
-const heure = date.split('-')[2].split('T')[1]
-const annee = d.getFullYear()
-const minute=d.getMinutes()
-//const jour=d.getDate()
-const jour=date.split('-')[2].split('T')[0]
-const jour_clair=jours_short[d.getDay()]
-const mois_clair = mois_chiffre[d.getMonth()]
-//return `${jour_clair} ${jour} ${mois_clair } ${annee} ${heure}h `
-return `${jour_clair} ${jour}/${mois_clair } ${heure}h `//version d'affichage courte sans l'année parcequ'on s'en fout un peu...
+        const mois = ["janvier","fevrier","mars","avril","mai","juin","juillet","aout","septembre","octobre","novembre","decembre"]
+        const mois_chiffre = ["01","02","03","04","05","06","07","08","09","10","11","12"]
+        const jours = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"]
+        const jours_short = ["dim","lun","mar","mer","jeu","ven","sam"]
+        const d = new Date(date)
+        //const heure= d.getHours() 
+        const heure = date.split('-')[2].split('T')[1]
+        const annee = d.getFullYear()
+        const minute=d.getMinutes()
+        //const jour=d.getDate()
+        const jour=date.split('-')[2].split('T')[0]
+        const jour_clair=jours_short[d.getDay()]
+        const mois_clair = mois_chiffre[d.getMonth()]
+        //return `${jour_clair} ${jour} ${mois_clair } ${annee} ${heure}h `
+        return `${jour_clair} ${jour}/${mois_clair } ${heure}h `//version d'affichage courte sans l'année parcequ'on s'en fout un peu...
 }
 
 for(let key in terrains){
@@ -142,4 +150,62 @@ radio4J.onclick=()=>{
 //    clearRows()
 //    printMeteo(choices.value,checkBox_compatible.checked,n_previ.value)
 //}
+const convertDuration = (duree) =>{
+        //convertit une durée donnée en millisec  en seconde ou  heure ou jour ou minute
+        if (duree < 60){
+                return `${duree.toFixed(0)} secondes`
+        }else if (duree < 3600){
+                const mn = duree/60
+                return `${mn.toFixed(0)} minutes`
+        }else if (duree < 86400){
+                const hr=duree/3600
+                return `${hr.toFixed(0)} heure(s)`
+        }else {
+                const jour = duree/86400
+                return `${jour.toFixed(0)} jours(s)`
+        }
+                
+}
+const printBalise = async (balise)=>{
+        const url =  `http://api.pioupiou.fr/v1/live/${balise.id}`
+        const response  = await fetch(url) 
+        const liveWind = await response.json()
+        const time = new Date(liveWind.data.measurements.date)
+        const timeRef= time.getTime()
+        const heading = liveWind.data.measurements.wind_heading
+        const avg_wind = liveWind.data.measurements.wind_speed_avg
+        const max_wind= liveWind.data.measurements.wind_speed_max
+        const divWind = document.getElementById(`${balise.name}-wind`)
+        const maintenant = Date.now() // l'heure actuelle en millisec depuis 1970
+        const lastMeasure = (maintenant-timeRef)/1000
+        const timeSinceLastMeasure = convertDuration(lastMeasure)
+        //console.log(heading)
+        //console.log(avg_wind)
+        //console.log(max_wind)
+        const canvas = document.getElementById(balise.name)
+        const ctx = canvas.getContext("2d")
+        const windValues = `${avg_wind}/${max_wind} km/h </br> il y a ${timeSinceLastMeasure}`
+        ctx.translate(25,25)
+        ctx.rotate(Math.PI+heading*Math.PI/180)
+        ctx.beginPath()
+        ctx.moveTo(0,20)
+        ctx.lineTo(0,-20)
+        ctx.lineTo(5,-15)
+        ctx.lineTo(-5,-15)
+        ctx.lineTo(0,-20)
+        ctx.lineTo(0,20)
+        ctx.fillStyle = "red"
+        ctx.strokeStyle = "red"
+        ctx.fill()
+        ctx.stroke()
+        console.log(`il y a ${timeSinceLastMeasure}`)
+        console.log(lastMeasure)
+        divWind.innerHTML=windValues
+}
 printMeteo(choices.value,checkBox_compatible.checked,forecast_duration())
+printBalise(rissas)
+printBalise(bergies)
+printBalise(rustrel)
+printBalise(graveyron)
+printBalise(saint_amand)
+
