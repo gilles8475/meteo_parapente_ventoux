@@ -115,7 +115,7 @@ choices.onchange=()=>{
 }
 
 checkBox_compatible.onchange = ()=>{
-    console.log(checkBox_compatible.checked)
+    //console.log(checkBox_compatible.checked)
     clearRows()
     printMeteo(choices.value,checkBox_compatible.checked,forecast_duration())
 
@@ -124,7 +124,7 @@ checkBox_compatible.onchange = ()=>{
 
 const forecast_duration= ()=>{
     var n=radio1J.value*radio1J.checked + radio2J.value*radio2J.checked + radio3J.value*radio3J.checked + radio4J.value*radio4J.checked
-    console.log(n)
+    //console.log(n)
     return n
 }
 
@@ -198,8 +198,8 @@ const printBalise = async (balise)=>{
         ctx.strokeStyle = "red"
         ctx.fill()
         ctx.stroke()
-        console.log(`il y a ${timeSinceLastMeasure}`)
-        console.log(lastMeasure)
+        //console.log(`il y a ${timeSinceLastMeasure}`)
+        //console.log(lastMeasure)
         divWind.innerHTML=windValues
 }
 printMeteo(choices.value,checkBox_compatible.checked,forecast_duration())
