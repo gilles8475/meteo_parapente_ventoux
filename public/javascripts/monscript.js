@@ -16,7 +16,7 @@ const saint_amand={id:1336, name: "saint_amand"}
 const rustrel={id:601, name:"rustrel"}
 const banon={id:157, name:"banon"}
 const bergies={id:1309, name:"bergies"}
-
+const balisesVent=[rissas,graveyron,saint_amand,rustrel,banon,bergies]
 const converDate = (date)=>{
         const mois = ["janvier","fevrier","mars","avril","mai","juin","juillet","aout","septembre","octobre","novembre","decembre"]
         const mois_chiffre = ["01","02","03","04","05","06","07","08","09","10","11","12"]
@@ -172,7 +172,8 @@ const printBalise = async (balise)=>{
         const liveWind = await response.json()
         const time = new Date(liveWind.data.measurements.date)
         const timeRef= time.getTime()
-        const heading = liveWind.data.measurements.wind_heading
+        let heading = liveWind.data.measurements.wind_heading
+        if (heading==0){heading=360}
         const avg_wind = liveWind.data.measurements.wind_speed_avg
         const max_wind= liveWind.data.measurements.wind_speed_max
         const divWind = document.getElementById(`${balise.name}-wind`)
@@ -185,27 +186,46 @@ const printBalise = async (balise)=>{
         const canvas = document.getElementById(balise.name)
         const ctx = canvas.getContext("2d")
         const windValues = `${avg_wind}/${max_wind} km/h </br> il y a ${timeSinceLastMeasure}`
+        ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight)
         ctx.translate(25,25)
         ctx.rotate(Math.PI+heading*Math.PI/180)
+        
         ctx.beginPath()
-        ctx.moveTo(0,20)
-        ctx.lineTo(0,-20)
-        ctx.lineTo(5,-15)
-        ctx.lineTo(-5,-15)
-        ctx.lineTo(0,-20)
-        ctx.lineTo(0,20)
-        ctx.fillStyle = "red"
-        ctx.strokeStyle = "red"
+        ctx.fillStyle ="#0DCAF0"
+        ctx.arc(0,0,25,0,2*Math.PI)
         ctx.fill()
-        ctx.stroke()
+
+        ctx.beginPath()
+        //ctx.moveTo(0,20)
+        //ctx.lineTo(0,-20)
+        //ctx.lineTo(5,-15)
+        //ctx.lineTo(-5,-15)
+        //ctx.lineTo(0,-20)
+        //ctx.lineTo(0,20)
+        // dessin d'une fleche pour indiquer la direction du vent
+        ctx.moveTo(-5,20)
+        ctx.lineTo(0,-20)
+        ctx.lineTo(5,20)
+        ctx.closePath()
+        ctx.fillStyle = "#003300"
+        ctx.fill()
+        //ctx.stroke()
+        ctx.rotate(-Math.PI-heading*Math.PI/180)
+        ctx.translate(-25,-25)
+        ctx.fillStyle="#FFFF66"
+        ctx.textAlign="center"
+        ctx.textBaseline="middle"
+        ctx.font="bold 12px Arial"
+        ctx.fillText(heading.toFixed(0)+"°",25,25)
         //console.log(`il y a ${timeSinceLastMeasure}`)
         //console.log(lastMeasure)
         divWind.innerHTML=windValues
 }
 printMeteo(choices.value,checkBox_compatible.checked,forecast_duration())
-printBalise(rissas)
-printBalise(bergies)
-printBalise(rustrel)
-printBalise(graveyron)
-printBalise(saint_amand)
+for (let balise of balisesVent){
+        printBalise(balise)
+}
 
+for (let balise of balisesVent){
+        document.getElementById(balise.name).onclick= ()=>{printBalise(balise)}
+}
